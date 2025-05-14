@@ -2,56 +2,139 @@
 #include <string>
 using namespace std;
 
-// Use an enum for item selection.  This aligns with the tutorial.
-enum MenuItem {
-    CARAMEL_FRAP,
-    CARAMEL_CRUNCH_FRAP,
+// Enums for item categories and specific items
+enum Category {
+    FOOD,
+    DRINK,
+    TEA
+};
+
+enum FoodItem {
     GRILLED_CHEESE,
-    CHAI_LATTE
+    HAM_SWISS_BAGUETTE,
+    TOMATO_MOZZARELLA
+};
+
+enum DrinkItem {
+    CARAMEL_FRAP,
+    MOCHA_COOKIE_FRAP,
+    COFFEE_FRAP
+};
+
+enum TeaItem {
+    CHAI_LATTE,
+    MATCHA_LATTE,
+    LONDON_FOG
 };
 
 int main() {
-    // Basic variables, as explained in the tutorial.
+    // Variables for user choice and quantity
+    int categoryChoice;
     int itemChoice;
     int quantity;
-    double price = 0.0; // Initialize price
+    double price = 0.0;
 
-    // Display a simplified menu using cout.
+    // Display menu categories
     cout << "*** Vending Machine ***\n";
-    cout << "1. Caramel Frappuccino\n";
-    cout << "2. Caramel Crunch Frappuccino\n";
-    cout << "3. Grilled Cheese Sandwich\n";
-    cout << "4. Chai Latte\n";
-    cout << "Enter the number of your choice: ";
-    cin >> itemChoice;
+    cout << "Categories:\n";
+    cout << FOOD << ". Food\n";
+    cout << DRINK << ". Drink\n";
+    cout << TEA << ". Tea\n";
+    cout << "Enter the number of your category choice: ";
+    cin >> categoryChoice;
 
-    cout << "Enter the quantity: ";
-    cin >> quantity;
+    // Display items within the chosen category
+    switch (categoryChoice) {
+        case FOOD:
+            cout << "\nFood Items:\n";
+            cout << GRILLED_CHEESE << ". Grilled Cheese Sandwich\n";
+            cout << HAM_SWISS_BAGUETTE << ". Ham and Swiss Baguette\n";
+            cout << TOMATO_MOZZARELLA << ". Tomato Mozzarella\n";
+            cout << "Enter the number of your food choice: ";
+            cin >> itemChoice;
 
-    // Use a switch statement, as shown in the tutorial, to determine the price.
-    switch (itemChoice) {
-        case CARAMEL_FRAP:
-            cout << "Caramel Frappuccino selected.\n";
-            price = 3.00 * quantity; // Example price
+            cout << "Enter the quantity: ";
+            cin >> quantity;
+
+            // Calculate price based on food choice
+            switch (itemChoice) {
+                case GRILLED_CHEESE:
+                    price = 5.99 * quantity; // Example price
+                    break;
+                case HAM_SWISS_BAGUETTE:
+                    price = 7.29 * quantity; // Example price
+                    break;
+                case TOMATO_MOZZARELLA:
+                    price = 6.99 * quantity; // Example price
+                    break;
+                default:
+                    cout << "Invalid selection.\n";
+                    return 1;
+            }
             break;
-        case CARAMEL_CRUNCH_FRAP:
-            cout << "Caramel Crunch Frappuccino selected.\n";
-            price = 3.50 * quantity; // Example price
+
+        case DRINK:
+            cout << "\nDrink Items:\n";
+            cout << CARAMEL_FRAP << ". Caramel Frappuccino\n";
+            cout << MOCHA_COOKIE_FRAP << ". Mocha Cookie Frappuccino\n";
+            cout << COFFEE_FRAP << ". Coffee Frappuccino\n";
+            cout << "Enter the number of your drink choice: ";
+            cin >> itemChoice;
+
+            cout << "Enter the quantity: ";
+            cin >> quantity;
+
+            // Calculate price based on drink choice
+            switch (itemChoice) {
+                case CARAMEL_FRAP:
+                    price = 4.50 * quantity; // Example price
+                    break;
+                case MOCHA_COOKIE_FRAP:
+                    price = 4.75 * quantity; // Example price
+                    break;
+                case COFFEE_FRAP:
+                    price = 3.75 * quantity; // Example price
+                    break;
+                default:
+                    cout << "Invalid selection.\n";
+                    return 1;
+            }
             break;
-        case GRILLED_CHEESE:
-            cout << "Grilled Cheese Sandwich selected.\n";
-            price = 5.00 * quantity; // Example price
+
+        case TEA:
+            cout << "\nTea Items:\n";
+            cout << CHAI_LATTE << ". Chai Latte\n";
+            cout << MATCHA_LATTE << ". Matcha Latte\n";
+            cout << LONDON_FOG << ". London Fog\n";
+            cout << "Enter the number of your tea choice: ";
+            cin >> itemChoice;
+
+            cout << "Enter the quantity: ";
+            cin >> quantity;
+
+            // Calculate price based on tea choice
+            switch (itemChoice) {
+                case CHAI_LATTE:
+                    price = 4.25 * quantity; // Example price
+                    break;
+                case MATCHA_LATTE:
+                    price = 4.95 * quantity; // Example price
+                    break;
+                case LONDON_FOG:
+                    price = 4.65 * quantity; // Example price
+                    break;
+                default:
+                    cout << "Invalid selection.\n";
+                    return 1;
+            }
             break;
-        case CHAI_LATTE:
-            cout << "Chai Latte selected.\n";
-            price = 4.00 * quantity; // Example price
-            break;
+
         default:
-            cout << "Invalid selection.\n";
-            return 1; // Use a non-zero return code for errors
+            cout << "Invalid category selection.\n";
+            return 1;
     }
 
-    // Output the price.
+    // Display total price
     cout << "Total price: $" << price << endl;
 
     return 0;
